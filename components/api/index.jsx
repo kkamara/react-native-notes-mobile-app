@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { View, Text, FlatList, } from "react-native"
+import { View, Text, FlatList, ActivityIndicator, } from "react-native"
 
 export default function Api() {
     const [loading, setLoading] = useState(false)
@@ -25,9 +25,10 @@ export default function Api() {
     console.log(apiData)
 
     if (loading) {
-        return <View>
-            <Text>Loading...</Text>
-        </View>
+        return <ActivityIndicator
+            color={'red'}
+            size="large"
+        />
     }
 
     return (
