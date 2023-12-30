@@ -6,6 +6,7 @@ import {
   Button,
   ScrollView,
   FlatList,
+  Pressable,
 } from "react-native"
 import { useState, } from "react"
 
@@ -22,6 +23,16 @@ export default function App() {
     setValue("")
   }
 
+  function handleRemoveItem(currentIndex) {
+    console.log(currentIndex)
+    let copyListOfNotes = [...listOfNotes]
+
+    copyListOfNotes = copyListOfNotes.filter(
+      (_, index) => currentIndex !== index
+    )
+    setListOfNotes(copyListOfNotes)
+  }
+
   return (
     <View style={{
       padding: 60,
@@ -35,9 +46,11 @@ export default function App() {
       <FlatList
         data={listOfNotes}
         renderItem={(itemData) => (
-          <Text style={styles.listItem}>
-            {itemData.item}
-          </Text>
+          <Pressable onPress={() => handleRemoveItem(itemData.index)}>
+            <Text style={styles.listItem}>
+              {itemData.item}
+            </Text>
+          </Pressable>
         )}
       />
     </View>
