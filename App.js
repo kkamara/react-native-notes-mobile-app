@@ -5,6 +5,7 @@ import {
   TextInput,
   Button,
   ScrollView,
+  FlatList,
 } from "react-native"
 import { useState, } from "react"
 
@@ -29,16 +30,17 @@ export default function App() {
       flex: 1,
     }}>
       <View style={styles.inputContainer}>
-        <TextInput onChangeText={handleOnChangeText} style={styles.input} placeholder="Add your note here" />
+        <TextInput value={value} onChangeText={handleOnChangeText} style={styles.input} placeholder="Add your note here" />
         <Button onPress={handleOnPressButton} color={"#000"} title="Add note" />
       </View>
-      <ScrollView>
-        <View style={styles.listContainer}>
-          {listOfNotes.map((item, index) => (
-            <Text key={`item${index}`} style={styles.listItem}>{item}</Text>)
-          )}
-        </View>
-      </ScrollView>
+      <FlatList
+        data={listOfNotes}
+        renderItem={(itemData) => (
+          <Text style={styles.listItem}>
+            {itemData.item}
+          </Text>
+        )}
+      />
     </View>
   )
 }
