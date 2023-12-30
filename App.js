@@ -19,9 +19,8 @@ export default function App() {
 
   function handleOnPressButton() {
     setListOfNotes(currentNotes => [...currentNotes, value])
+    setValue("")
   }
-
-  console.log(listOfNotes)
 
   return (
     <View style={{
