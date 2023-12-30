@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { View, Text, FlatList, } from "react-native"
 
 export default function Api() {
+    const [loading, setLoading] = useState(false)
     const [apiData, setApiData] = useState([])
 
     useEffect(() => {
+        setLoading(true)
         async function getDataFromApi() {
             const apiResponse = await fetch('https://dummyjson.com/users')
             const finalData = await apiResponse.json()
@@ -13,6 +15,7 @@ export default function Api() {
                 setApiData(finalData.users.map(
                     userItem => `${userItem.firstName} ${userItem.lastName} ${userItem.age}`
                 ))
+                setLoading(false)
             }
         }
 
@@ -20,6 +23,12 @@ export default function Api() {
     }, [])
 
     console.log(apiData)
+
+    if (loading) {
+        return <View>
+            <Text>Loading...</Text>
+        </View>
+    }
 
     return (
         <View>
