@@ -9,6 +9,7 @@ import {
   Pressable,
 } from "react-native"
 import { useState, } from "react"
+import Api from "./components/api"
 
 export default function App() {
   const [value, setValue] = useState("")
@@ -43,16 +44,21 @@ export default function App() {
         <TextInput value={value} onChangeText={handleOnChangeText} style={styles.input} placeholder="Add your note here" />
         <Button onPress={handleOnPressButton} color={"#000"} title="Add note" />
       </View>
-      <FlatList
-        data={listOfNotes}
-        renderItem={(itemData) => (
-          <Pressable onPress={() => handleRemoveItem(itemData.index)}>
-            <Text style={styles.listItem}>
-              {itemData.item}
-            </Text>
-          </Pressable>
-        )}
-      />
+      <View>
+        <FlatList
+          data={listOfNotes}
+          renderItem={(itemData) => (
+            <Pressable onPress={() => handleRemoveItem(itemData.index)}>
+              <Text style={styles.listItem}>
+                {itemData.item}
+              </Text>
+            </Pressable>
+          )}
+        />
+      </View>
+      <View style={styles.apiContainer}>
+        <Api />
+      </View>
     </View>
   )
 }
@@ -73,7 +79,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingTop: 30,
-    flex: 3,
+    flex: 1,
   },
   listItem: {
     borderRadius: 1,
@@ -82,5 +88,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#fff",
     fontSize: 20,
+  },
+  apiContainer: {
+    flex: 2,
   },
 })
